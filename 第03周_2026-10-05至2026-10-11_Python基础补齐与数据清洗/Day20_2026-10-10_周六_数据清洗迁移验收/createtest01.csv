@@ -1,0 +1,7 @@
+id,name,status,reason
+101,梨,valid,
+,苹果,rejected,缺少编号
+,榴莲,rejected,缺少编号
+,香蕉,rejected,编号为None
+101,橘子,duplicated,编号重复
+101,桃子,duplicated,编号重复
