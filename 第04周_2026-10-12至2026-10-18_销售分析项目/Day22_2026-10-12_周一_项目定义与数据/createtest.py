@@ -127,8 +127,11 @@ def rank_course(course_counts):
     if course_counts == None:
         print("报名列表错误，请检查后传入")
         return None
+    courses_pair = []
+    courses_list = list(course_counts.items())
+    for course in courses_list:
+        if isinstance(course,str):
 
-    courses_pair = list(course_counts.items())
     sorted_courses = sorted(courses_pair,key=pair)
 
     return sorted_courses
@@ -169,3 +172,4 @@ course_records = [
 # output(records_01,"Day20_2026-10-10_周六_数据清洗迁移验收/createtest02.csv")
 # print(count_courses(course_records))
 print(count_courses(course_records))
+print(rank_course(count_courses(course_records)))
