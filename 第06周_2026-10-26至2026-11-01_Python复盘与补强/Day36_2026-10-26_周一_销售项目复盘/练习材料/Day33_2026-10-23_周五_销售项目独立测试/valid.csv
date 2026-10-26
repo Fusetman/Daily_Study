@@ -1,0 +1,11 @@
+line_id,product,category,quantity,unit_price
+S001,notebook,stationery,2,12.50
+S002,pen,stationery,5,3.00
+S003,folder,stationery,3,8.00
+S004,mug,drinkware,2,18.00
+S005,notebook,stationery,2,10.00
+S006,pen,stationery,10,3.00
+S007,folder,stationery,2,8.00
+S008,mug,drinkware,1,18.00
+S009,pen,stationery,2,0
+S010,folder,stationery,1,5.00

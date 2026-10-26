@@ -1,0 +1,7 @@
+line_id,product,category,quantity,unit_price,reasons
+S011,notebook,stationery,0,12.50,['数量不能为0']
+S012,mug,drinkware,1,-18.00,['单价不能为负数']
+S013,,stationery,2,3.00,['商品名为空']
+S014,pen,stationery,abc,3.00,['数量格式不正确']
+S015,folder,stationery,1,,"['单价为空', '单价格式不正确']"
+S016,mug,,1,18.00,['品类为空']
