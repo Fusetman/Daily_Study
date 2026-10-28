@@ -85,36 +85,44 @@ def sign_rate(records):
     zone_sign = {}
     sign_rate = {}
     zone_valid = {}
+    zone_rate = {}
     for row in clean:
-        print(row)
         current_zone = row['zone']
         current_sign = row['status']
         if current_sign == 'signed':
+           #
             zone_sign[current_zone] = zone_sign.get(current_zone,0) + 1
-            zone_valid[current_zone] = zone_sign.get(current_zone,0) + 1
-        else:
-            zone_valid[current_zone] = zone_sign.get(current_zone,0) + 1
+            zone_valid[current_zone] = zone_valid.get(current_zone,0) + 1
+        elif current_sign == 'pending':
+            zone_valid[current_zone] = zone_valid.get(current_zone,0) + 1
 
+    for row in clean:
+        current_zone = row['zone']
+        current_sign = row['status']
+        rate = zone_sign[current_zone]/zone_valid[current_zone]
+        zone_rate[current_zone] = (zone_sign[current_zone], f'{rate:.2%}')
 
-    print(zone_sign)
-    print(zone_valid)
+    return zone_rate
 
-sign_rate(records)
 def except_package(records,path):
-    sorted = rank_package(records)
     sign = sign_rate(records)
+    kept_zone = []
     with open(path,'w',encoding='utf-8',newline='')as file:
         writer = csv.writer(file)
         writer.writerow(['zone','total','signed','sign_rate'])
         for row in rank_package(records):
-            writer.writerow([row[1],sign[row[1]][0],sign[row[1]][1],sign[row[1]][0]])
+            if row[1] not in kept_zone:
+                writer.writerow([row[1],sign[row[1]][0],sign[row[1]][0],sign[row[1]][1]])
+                kept_zone.append(row[1])
+            else:
+                continue
 
 
-print(rank_package(records))
-print(cleaned_rows(records))
+print(len(records))
+print(len(cleaned_rows(records)['valid']))
+print(len(cleaned_rows(records)['rejected'] ))
+except_package(records,'Day37_2026-10-27_周二_销售项目边界补强/练习材料/快递签收独立小测/summary.csv')
 clean_test = cleaned_rows(records)
-print(len(clean_test['valid']))
-print(cleaned_rows([{'package_id': 'P009', 'zone': 'north', 'status': 'signed'}]))
 assert len(clean_test['valid']) == 6
 assert len(clean_test['rejected']) == 3
-assert len(clean_test['duplicate']) == 0
+assert len(clean_test['duplicated']) == 0

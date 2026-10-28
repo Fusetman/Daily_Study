@@ -1,0 +1,4 @@
+package_id,zone,status
+P006, ,signed
+P007,west,lost
+,south,pending
